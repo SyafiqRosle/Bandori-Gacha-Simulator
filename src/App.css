@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+  
+}
+
+button{
+  background-color: rgb(28, 182, 209); 
+  border:none;
+  color:white;
+  padding: 1.5vw 3vw;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  margin:20px;
+}
+
+.animate{
+  position: relative;
+}
+.ticket{
+  position:absolute;
+  top:30%;
+  left:25%;
+  width:50%;
+}
+.aya{
+  z-index:2;
+  left:19vw;
+  position:absolute;
+  width:60vw;
+  
+  -webkit-transition: opacity 0.5s  ease-in-out;
+       -moz-transition: opacity 0.5s  ease-in-out;
+        -ms-transition: opacity 0.5s  ease-in-out;
+         -o-transition: opacity 0.5s  ease-in-out;
+            transition: opacity 0.5s  ease-in-out;
+            opacity: 0;
+}
+
+

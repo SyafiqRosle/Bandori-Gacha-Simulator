@@ -1,0 +1,47 @@
+
+h2{
+  position:absolute;
+  
+  font-size: 3.5vw;
+  font-family: 'Glacial Indifference';
+  font-weight:bold;
+  left:20vw;
+  top:20vw;
+}
+.frame{
+  position: relative;
+}
+.list{
+
+position:absolute;
+top:8vw;
+right:24vw;
+color:rgb(209, 40, 91);
+text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+
+}
+.icon{
+  position:absolute;
+  right:28vw;
+  top:120%;
+  width:10vw;
+}
+.transparent{
+  position:absolute;
+  top:-2vw;
+  left:17vw;
+  width:40vw;
+}
+.jname{
+  font-size:2vw;
+  font-family: 'Glacial Indifference';
+  font-weight:bold;
+  
+}
+.art{
+  position:absolute;
+  top:0;
+  left:26%;
+  width:44.9vw;
+   
+}
