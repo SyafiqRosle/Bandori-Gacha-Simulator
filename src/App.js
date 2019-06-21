@@ -5,14 +5,25 @@ import Aya from './aya.png';
 import './App.css';
 import Gacha from './Gacha';
 import Ticket from './ticket.png';
+import Table from './Table';
 
 const App=()=>{
-  const[id,setId]=useState('');
+ 
   const[cards, setCard]=useState([]);
   const[display,displayCard]=useState(false);
   const[pgno,setPgno]=useState('2');
   let[show,setShow]=useState(0);
-  
+  let[s2count, increment2]=useState(0);
+  let[s3count, increment3]=useState(0);
+  let[s4count, increment4]=useState(0);
+  let[pullcount, incrementp]=useState(0);
+  let [rate2,setRate2]=useState(0);
+  let [rate3,setRate3]=useState(0);
+  let [rate4,setRate4]=useState(0);
+  let n2=rate2.toFixed(3);
+  let n3=rate3.toFixed(3);
+  let n4=rate4.toFixed(3);
+
   useEffect(()=>{
      getCards(); 
 
@@ -22,12 +33,15 @@ const App=()=>{
     displayCard(true);
     randomPg();
     setShow(show+=1);
+    incrementp(pullcount+=1);
+    
   }
 //probability func
   const probability = (n)=> {
     return !!n && Math.random() <= n;
-  };
+  }
 
+  
   const randomPg=e=>{
     const rand = 2+ Math.floor(Math.random()*58);
     console.log("pgno"+rand)
@@ -46,6 +60,7 @@ const App=()=>{
     let p3 =  probability(0.1);
     console.log("3star:"+p3);
     console.log("4star:"+p4);
+    
     if(p4){
       for(let i=0;i<10;i++){
         if(data.results[i].i_rarity===4)s4_array.push(data.results[i]);
@@ -53,8 +68,8 @@ const App=()=>{
       //pick a random 4 star from the array
       let rand_index=Math.floor(Math.random()*s4_array.length);
       setCard(s4_array[rand_index]);
-      console.log(s4_array[rand_index]); 
-      console.log("wow 4star")
+      if(display)increment4(s4count+=1);
+      
   }
     else if(p3){
         for(let i=0;i<10;i++){
@@ -63,8 +78,8 @@ const App=()=>{
         //pick a random 3 star from the array
         let rand_index=Math.floor(Math.random()*s3_array.length);
         setCard(s3_array[rand_index]);
-        console.log(s3_array[rand_index]);
-        console.log("meh 3star")
+        if(display) increment3(s3count+=1);
+        
     } 
     else{
       for(let i=0;i<10;i++){
@@ -73,10 +88,12 @@ const App=()=>{
       //pick a random 2 star from the array
       let rand_index=Math.floor(Math.random()*s2_array.length);
       setCard(s2_array[rand_index]);
-      console.log(s2_array[rand_index]);
-      console.log("boo 2star")
+      if(display)increment2(s2count+=1);
+      
     }
-   
+    setRate4(s4count/pullcount*100);
+    setRate3(s3count/pullcount*100);
+    setRate2(s2count/pullcount*100); 
   }
   return (
     <div className="App">
@@ -124,7 +141,16 @@ const App=()=>{
             }
      </div>
      </Fade>
+     <Table
+        star2={s2count}
+        star3={s3count}
+        star4={s4count}
+        pulls={pullcount}
+        rate2={n2}
+        rate3={n3}
+        rate4={n4}/>
     </div>
+    
   );
 }
 

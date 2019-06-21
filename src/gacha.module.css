@@ -1,13 +1,5 @@
 
-h2{
-  position:absolute;
-  
-  font-size: 3.5vw;
-  font-family: 'Glacial Indifference';
-  font-weight:bold;
-  left:20vw;
-  top:20vw;
-}
+
 .frame{
   position: relative;
 }
@@ -44,4 +36,17 @@ text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   left:26%;
   width:44.9vw;
    
+}
+th, td {
+  padding: 2vw;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+table {
+  position:absolute;
+  border: 1px solid black;
+  top:60vw;
+  left:30vw;
+  width:40vw;
+  margin:10px;
 }
