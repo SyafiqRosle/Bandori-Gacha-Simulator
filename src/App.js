@@ -57,7 +57,7 @@ const App=()=>{
     let s2_array=[];
 
     let p4 =  probability(0.03);
-    let p3 =  probability(0.85);
+    let p3 =  probability(0.085);
     console.log("3star:"+p3);
     console.log("4star:"+p4);
     
