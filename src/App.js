@@ -105,7 +105,10 @@ const App=()=>{
     } 
     else{
       doP2(data.results);
-      
+      if(s2_array.length===0){
+        doP4(data.results);
+        if(s4_array.length===0)doP3(data.results);
+      }
     }
     setRate4(s4count/pullcount*100);
     setRate3(s3count/pullcount*100);
