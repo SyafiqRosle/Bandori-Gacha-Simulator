@@ -24,6 +24,10 @@ const App=()=>{
   let n3=rate3.toFixed(3);
   let n4=rate4.toFixed(3);
 
+  let s4_array=[];
+  let s3_array=[];
+  let s2_array=[];
+
   useEffect(()=>{
      getCards(); 
 
@@ -36,6 +40,35 @@ const App=()=>{
     incrementp(pullcount+=1);
     
   }
+  const doP4=(d)=>{
+    for(let i=0;i<10;i++){
+      if(d[i].i_rarity===4)s4_array.push(d[i]);
+    }
+    //pick a random 4 star from the array
+    let rand_index=Math.floor(Math.random()*s4_array.length);
+    setCard(s4_array[rand_index]);
+    if(display)increment4(s4count+=1);
+  }
+  const doP3=(d)=>{
+    for(let i=0;i<10;i++){
+      if(d[i].i_rarity===3)s3_array.push(d[i]);
+    }
+    //pick a random 3 star from the array
+    let rand_index=Math.floor(Math.random()*s3_array.length);
+    setCard(s3_array[rand_index]);
+    if(display)increment3(s3count+=1);
+  }
+
+  const doP2=(d)=>{
+    for(let i=0;i<10;i++){
+      if(d[i].i_rarity===2)s2_array.push(d[i]);
+    }
+    //pick a random 2 star from the array
+    let rand_index=Math.floor(Math.random()*s2_array.length);
+    setCard(s2_array[rand_index]);
+    if(display)increment2(s2count+=1);
+  }
+
 //probability func
   const probability = (n)=> {
     return !!n && Math.random() <= n;
@@ -52,9 +85,7 @@ const App=()=>{
     const data = await response.json();
     console.log(data.results);
     
-    let s4_array=[];
-    let s3_array=[];
-    let s2_array=[];
+    
 
     let p4 =  probability(0.03);
     let p3 =  probability(0.085);
@@ -62,33 +93,18 @@ const App=()=>{
     console.log("4star:"+p4);
     
     if(p4){
-      for(let i=0;i<10;i++){
-        if(data.results[i].i_rarity===4)s4_array.push(data.results[i]);
-      }
-      //pick a random 4 star from the array
-      let rand_index=Math.floor(Math.random()*s4_array.length);
-      setCard(s4_array[rand_index]);
-      if(display)increment4(s4count+=1);
-      
+     doP4(data.results);
+     if(s4_array.length===0){
+       doP3(data.results);
+       if(s3_array.length===0)doP2(data.results);
+    } 
   }
     else if(p3){
-        for(let i=0;i<10;i++){
-          if(data.results[i].i_rarity===3)s3_array.push(data.results[i]);
-        }
-        //pick a random 3 star from the array
-        let rand_index=Math.floor(Math.random()*s3_array.length);
-        setCard(s3_array[rand_index]);
-        if(display) increment3(s3count+=1);
-        
+      doP3(data.results);
+      if(s3_array.length===0)doP2(data.results);
     } 
     else{
-      for(let i=0;i<10;i++){
-        if(data.results[i].i_rarity===2)s2_array.push(data.results[i]);
-      }
-      //pick a random 2 star from the array
-      let rand_index=Math.floor(Math.random()*s2_array.length);
-      setCard(s2_array[rand_index]);
-      if(display)increment2(s2count+=1);
+      doP2(data.results);
       
     }
     setRate4(s4count/pullcount*100);
@@ -100,7 +116,7 @@ const App=()=>{
      <div className="Top">
        <h1>Bandori Gacha Simulator</h1>
        Are you feeling lucky? Play the gacha to find out!
-       
+       <p>Drop Rates reference: 4★=3%, 3★=8.5%, 2★=88.5% </p>
      </div>
      <div className="animate">
      
@@ -149,6 +165,7 @@ const App=()=>{
         rate2={n2}
         rate3={n3}
         rate4={n4}/>
+     
     </div>
     
   );

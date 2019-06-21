@@ -38,7 +38,8 @@ text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
    
 }
 th, td {
-  padding: 2vw;
+  padding: 0 1.2vw 1.2vw 1.2vw;
+  
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
@@ -48,5 +49,5 @@ table {
   top:60vw;
   left:30vw;
   width:40vw;
-  margin:10px;
+  
 }

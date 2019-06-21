@@ -3,7 +3,9 @@ import style from './gacha.module.css';
 
 const Table=({star2,star3,star4,pulls,rate2,rate3,rate4})=>{
     return(
+        
         <table>
+            <h2>Statistics</h2>
         <tr>
             <th>Rarity</th>
             <th>Count</th>
@@ -30,6 +32,7 @@ const Table=({star2,star3,star4,pulls,rate2,rate3,rate4})=>{
         <td> </td>
         <p className="pull">Pulls: {pulls}</p>
         <td> </td>
+       
         </table>
     );
 
