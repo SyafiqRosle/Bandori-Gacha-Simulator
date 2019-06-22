@@ -2,6 +2,7 @@
 
 .frame{
   position: relative;
+  
 }
 .list{
 
@@ -9,7 +10,7 @@ position:absolute;
 top:8vw;
 right:24vw;
 color:rgb(209, 40, 91);
-text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+text-shadow: -0.1vw 0 white, 0 0.1vw white, 0.1vw 0 white, 0 0.2vw white;
 
 }
 .icon{
@@ -25,7 +26,8 @@ text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
   width:40vw;
 }
 .jname{
-  font-size:2vw;
+  
+  font-size:2.1vw;
   font-family: 'Glacial Indifference';
   font-weight:bold;
   
@@ -38,16 +40,23 @@ text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
    
 }
 th, td {
-  padding: 0 1.2vw 1.2vw 1.2vw;
+  padding: 10px 3px;
   
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid black;
 }
 table {
-  position:absolute;
-  border: 1px solid black;
-  top:60vw;
+  box-shadow:         8px 3px 5px 6px rgba(0, 0, 0, 0.452);
+  font-family: "Glacial Indifference";
+  color:white;
+  border-collapse:collapse;
+  position:relative;
+  border-radius:10px;
+  top:40vw;
   left:30vw;
   width:40vw;
-  
+  background-color:rgba(231, 87, 118, 0.932);
 }
+
+
+

@@ -7,6 +7,7 @@ import Gacha from './Gacha';
 import Ticket from './ticket.png';
 import Table from './Table';
 
+
 const App=()=>{
  
   const[cards, setCard]=useState([]);
@@ -40,29 +41,20 @@ const App=()=>{
     incrementp(pullcount+=1);
     
   }
-  const doP4=(d)=>{
-    for(let i=0;i<10;i++){
-      if(d[i].i_rarity===4)s4_array.push(d[i]);
-    }
+  const doP4=()=>{ 
     //pick a random 4 star from the array
     let rand_index=Math.floor(Math.random()*s4_array.length);
     setCard(s4_array[rand_index]);
     if(display)increment4(s4count+=1);
   }
-  const doP3=(d)=>{
-    for(let i=0;i<10;i++){
-      if(d[i].i_rarity===3)s3_array.push(d[i]);
-    }
+  const doP3=()=>{
     //pick a random 3 star from the array
     let rand_index=Math.floor(Math.random()*s3_array.length);
     setCard(s3_array[rand_index]);
     if(display)increment3(s3count+=1);
   }
 
-  const doP2=(d)=>{
-    for(let i=0;i<10;i++){
-      if(d[i].i_rarity===2)s2_array.push(d[i]);
-    }
+  const doP2=()=>{
     //pick a random 2 star from the array
     let rand_index=Math.floor(Math.random()*s2_array.length);
     setCard(s2_array[rand_index]);
@@ -91,25 +83,35 @@ const App=()=>{
     let p3 =  probability(0.085);
     console.log("3star:"+p3);
     console.log("4star:"+p4);
+
+    //loop through all 10 cards in page
+    for(let i=0;i<10;i++){
+       //store each rarity into their array
+      if(data.results[i].i_rarity===4)s4_array.push(data.results[i]);
+      if(data.results[i].i_rarity===3)s3_array.push(data.results[i]);
+      if(data.results[i].i_rarity===2)s2_array.push(data.results[i]);
+    }
     
     if(p4){
-     doP4(data.results);
-     if(s4_array.length===0){
-       doP3(data.results);
-       if(s3_array.length===0)doP2(data.results);
-    } 
-  }
-    else if(p3){
-      doP3(data.results);
-      if(s3_array.length===0)doP2(data.results);
-    } 
-    else{
-      doP2(data.results);
-      if(s2_array.length===0){
-        doP4(data.results);
-        if(s4_array.length===0)doP3(data.results);
-      }
+     if(s4_array.length>0)doP4();    
+      //no 4 star so find a 3 star
+     else if(s3_array.length>0)doP3();
+      //no 3star so just get a 2 star
+     else doP2();   
     }
+
+    else if(p3){
+      if(s3_array.length>0)doP3();
+      else if(s2_array.length>0)doP2();
+      else doP4();
+    } 
+
+    else{
+      if(s2_array.length>0)doP2();
+      else if(s3_array.length>0)doP3();
+      else doP4();
+    }
+
     setRate4(s4count/pullcount*100);
     setRate3(s3count/pullcount*100);
     setRate2(s2count/pullcount*100); 
@@ -117,9 +119,10 @@ const App=()=>{
   return (
     <div className="App">
      <div className="Top">
+       
        <h1>Bandori Gacha Simulator</h1>
        Are you feeling lucky? Play the gacha to find out!
-       <p>Drop Rates reference: 4★=3%, 3★=8.5%, 2★=88.5% </p>
+       <p className="info">Actual Drop rates: 4★=3%, 3★=8.5%, 2★=88.5% </p>
      </div>
      <div className="animate">
      
@@ -127,13 +130,15 @@ const App=()=>{
      
      
      <button onClick={clicked}>
-     <Fade left>
-       <img className="ticket"src={Ticket} alt=""/>
-       </Fade>Play Gacha</button>
+    Play Gacha</button>
+
        <div>
+       <Fade left>
+       <img className="ticket"src={Ticket} alt=""/>
+       </Fade>
        {display?
        <Jump>
-     <Jump spy={show}>
+          <Jump spy={show}>
            <img className="aya" src={Aya} alt=""/>
            </Jump>
            </Jump>:
@@ -141,10 +146,10 @@ const App=()=>{
      }
        </div>
        <Fade right spy={show}>
-     <div className="gacha">
+        <div className="gacha">
      
-       {
-           cards.i_rarity>1&& 
+        {
+          cards.i_rarity>1&& 
           display?
           
           <Gacha
@@ -159,7 +164,7 @@ const App=()=>{
             console.log('GLHF')
             }
      </div>
-     </Fade>
+       </Fade>
      <Table
         star2={s2count}
         star3={s3count}

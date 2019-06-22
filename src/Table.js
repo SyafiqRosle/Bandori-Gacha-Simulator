@@ -29,9 +29,7 @@ const Table=({star2,star3,star4,pulls,rate2,rate3,rate4})=>{
         <td>{star4}</td>
         <td>{rate4}</td>
         </tr>
-        <td> </td>
-        <p className="pull">Pulls: {pulls}</p>
-        <td> </td>
+            <h3 className={style.pull}>Pulls: {pulls}</h3>   
        
         </table>
     );
